@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Proxy Group</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Card Layout Styles */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-icon {
+            height: 120px;
+            background-color: #f8f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .card-icon i {
+            font-size: 3rem;
+            color: #B22A6F;
+        }
+        
+        .card-content {
+            padding: 25px;
+        }
+        
+        .card-content h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .card-content p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .card-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #B22A6F;
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        
+        .card-link:hover {
+            background-color: #941b5a;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <div class="text-logo">
+                    <span class="logo-text">PROXY</span>
+                    <span class="logo-subtext">GROUP</span>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html" class="active">Services</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Banner -->
+    <section class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/services-bg.jpg');">
+        <div class="container">
+            <h1 class="fade-in">Our Services</h1>
+            <p class="slide-up">Comprehensive board solutions tailored to enhance governance and performance</p>
+        </div>
+    </section>
+
+    <!-- Services Card Section -->
+    <section class="services-section" style="padding: 80px 0; background-color: #f9f9f9;">
+        <div class="container">
+            <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+                <h2>What We Offer</h2>
+                <p>Explore our range of specialized board services</p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Board Governance Card -->
+                <div class="service-card" id="governance">
+                    <div class="card-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Board Governance</h3>
+                        <p>Comprehensive solutions to enhance board effectiveness and strategic oversight with robust governance frameworks.</p>
+                        <a href="#governance-modal" class="card-link">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Board Secretarial Card -->
+                <div class="service-card" id="secretarial">
+                    <div class="card-icon">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Board Secretarial</h3>
+                        <p>Professional secretarial services ensuring smooth board operations and regulatory compliance.</p>
+                        <a href="#secretarial-modal" class="card-link">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Board Administration Card -->
+                <div class="service-card" id="administration">
+                    <div class="card-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Board Administration</h3>
+                        <p>Essential operational support for effective board functioning and administrative processes.</p>
+                        <a href="#administration-modal" class="card-link">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Director Development Card -->
+                <div class="service-card" id="development">
+                    <div class="card-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Director Development</h3>
+                        <p>Programs to enhance board members' knowledge, skills, and effectiveness with tailored training.</p>
+                        <a href="#development-modal" class="card-link">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Data & Analytics Card -->
+                <div class="service-card" id="analytics">
+                    <div class="card-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Data & Analytics</h3>
+                        <p>Data-driven insights for strategic decision-making and effective board oversight.</p>
+                        <a href="#analytics-modal" class="card-link">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- AI Solutions Card -->
+                <div class="service-card" id="ai">
+                    <div class="card-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>AI Solutions</h3>
+                        <p>Expert guidance on leveraging artificial intelligence for strategic advantage in today's digital landscape.</p>
+                        <a href="#ai-modal" class="card-link">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- KYC Solutions Card -->
+                <div class="service-card" id="kyc">
+                    <div class="card-icon">
+                        <i class="fas fa-id-card"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>KYC Solutions</h3>
+                        <p>Comprehensive Know Your Customer solutions for regulatory compliance and effective risk management.</p>
+                        <a href="#kyc-modal" class="card-link">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section style="background-color: #B22A6F; color: white; padding: 60px 0; text-align: center;">
+        <div class="container">
+            <h2>Ready to Enhance Your Board's Performance?</h2>
+            <p style="max-width: 700px; margin: 0 auto 30px;">Contact us today to discuss how our services can help your board achieve excellence.</p>
+            <a href="contact.html" class="btn secondary" style="background-color: white; color: #B22A6F;">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <div class="text-logo footer-text-logo">
+                        <span class="logo-text">PROXY</span>
+                        <span class="logo-subtext">BOARD SERVICES</span>
+                    </div>
+                    <p class="tagline">CLOSE CORPORATION</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="services.html"><i class="fas fa-briefcase"></i> Services</a></li>
+                        <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+                        <li><a href="events.html"><i class="fas fa-calendar-alt"></i> Events</a></li>
+                        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-services">
+                    <h3>Our Services</h3>
+                    <ul>
+                        <li><a href="services.html#governance"><i class="fas fa-balance-scale"></i> Board Governance</a></li>
+                        <li><a href="services.html#secretarial"><i class="fas fa-clipboard-list"></i> Board Secretarial</a></li>
+                        <li><a href="services.html#development"><i class="fas fa-user-graduate"></i> Director Development</a></li>
+                        <li><a href="services.html#ai"><i class="fas fa-robot"></i> AI Solutions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-envelope"></i> info@proxygroup.com.na</p>
+                    <p><i class="fas fa-phone"></i> +264 81 622 3299</p>
+                    <p><i class="fas fa-phone"></i> +264 81 692 9792</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Proxy Group. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Mobile Navigation Toggle
+        document.querySelector('.nav-toggle').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+        
+        // Back to Top Button
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                document.querySelector('.back-to-top').classList.add('show');
+            } else {
+                document.querySelector('.back-to-top').classList.remove('show');
+            }
+        });
+        
+        document.querySelector('.back-to-top').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
