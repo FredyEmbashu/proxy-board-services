@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - Proxy Group</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <!-- Header -->
@@ -131,9 +131,8 @@
             </div>
             
             <!-- Contact Form -->
-            <div id="contact-form" class="contact-form-container">
-                <h2 style="text-align: center; margin-bottom: 30px;">Send Us a Message</h2>
-                <form id="contactForm" action="https://formspree.io/f/mjkwaowl" method="POST">
+            <div class="contact-form-container">
+                <form action="https://formspree.io/f/mjkwaowl" method="POST">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name">Full Name</label>
@@ -151,30 +150,19 @@
                         </div>
                         <div class="form-group">
                             <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group" style="flex: 1;">
-                            <label for="service">Service of Interest</label>
-                            <select id="service" name="service">
-                                <option value="">Select a Service</option>
-                                <option value="governance">Board Governance</option>
-                                <option value="secretarial">Board Secretarial</option>
-                                <option value="administration">Board Administration</option>
-                                <option value="development">Director Development</option>
-                                <option value="analytics">Data & Analytics</option>
-                                <option value="ai">Artificial Intelligence</option>
-                                <option value="kyc">KYC Solutions</option>
-                                <option value="other">Other</option>
+                            <select id="subject" name="subject">
+                                <option value="General Inquiry">General Inquiry</option>
+                                <option value="Service Request">Service Request</option>
+                                <option value="Partnership">Partnership</option>
+                                <option value="Other">Other</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="5" required></textarea>
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" rows="6" required></textarea>
                     </div>
-                    <button type="submit" class="btn primary" style="width: 100%;"><i class="fas fa-paper-plane" style="margin-right: 8px;"></i>Send Message</button>
+                    <button type="submit" class="btn primary">Send Message</button>
                 </form>
             </div>
         </div>
