@@ -36,32 +36,23 @@
         
         .advert-header {
             background: linear-gradient(135deg, #4a4a4a 0%, #2e2e2e 100%);
-            padding: 40px 30px;
+            padding: 30px 30px;  /* Reduced padding to make header smaller */
             color: white;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
         
-        .header-pattern {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-        
         .title {
-            font-size: 32px;
+            font-size: 28px;  /* Smaller title */
             font-weight: 800;
-            margin-bottom: 15px;
+            margin-bottom: 10px; /* Reduced margin */
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             position: relative;
         }
         
         .subtitle {
-            font-size: 18px;
+            font-size: 16px; /* Smaller subtitle */
             font-weight: 500;
             max-width: 600px;
             margin: 0 auto;
@@ -73,9 +64,10 @@
             align-items: center;
             justify-content: center;
             padding: 20px 30px;
-            padding-bottom: 40px;
+            padding-bottom: 110px; /* Increased to make room for card and separation */
             background: white;
             border-bottom: 1px solid #f0f0f0;
+            position: relative; /* Added for absolute positioning of card */
         }
         
         .logo {
@@ -104,8 +96,8 @@
         
         .logo:before {
             content: '';
-            width: 100px;
-            height: 100px;
+            width: 60px;
+            height: 60px;
             background-color: #c01b71;
             border-radius: 50%;
             position: absolute;
@@ -116,8 +108,8 @@
         
         .logo:after {
             content: '';
-            width: 100px;
-            height: 100px;
+            width: 60px;
+            height: 60px;
             background-color: #4a4a4a;
             border-radius: 50%;
             position: absolute;
@@ -371,17 +363,33 @@
             }
             
             .logo-bar {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
+                padding: 15px;
+                padding-bottom: 100px;
+            }
+            
+            .logo-circles {
+                width: 280px;
+                height: 160px;
+            }
+            
+            .logo-circle-pink,
+            .logo-circle-gray {
+                width: 160px;
+                height: 160px;
+            }
+            
+            .logo-text-container {
+                padding: 15px 25px;
+                top: 180px;
+                width: 200px;
             }
             
             .title {
-                font-size: 24px;
+                font-size: 22px;
             }
             
             .subtitle {
-                font-size: 16px;
+                font-size: 14px;
             }
             
             .contact-info {
@@ -395,7 +403,6 @@
     <div class="advert-container">
         <!-- Header Section -->
         <div class="advert-header">
-            <div class="header-pattern"></div>
             <h1 class="title">Directors' Artificial Intelligence (AI) Workshop</h1>
             <p class="subtitle">Position your Board for Governance and strategic AI oversight in the digital era</p>
         </div>
@@ -403,10 +410,14 @@
         <!-- Logo and Price Bar -->
         <div class="logo-bar">
             <div class="logo">
-                                <span class="logo-text">    </span>
-                <span class="logo-subtext">      </span>
-                <span class="logo-text">PROXY GROUP</span>
-                <span class="logo-subtext">BOARD SERVICES</span>
+                <div class="logo-circles">
+                    <div class="logo-circle-pink"></div>
+                    <div class="logo-circle-gray"></div>
+                </div>
+                <div class="logo-text-container">
+                    <div class="logo-text">PROXY GROUP</div>
+                    <div class="logo-subtext">BOARD SERVICES</div>
+                </div>
             </div>
         </div>
         
