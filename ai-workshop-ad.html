@@ -8,7 +8,7 @@
     <meta property="og:image" content="https://images.unsplash.com/photo-1589254065878-42c9da997008?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=630&q=80">
     <meta property="og:url" content="https://proxygroup.netlify.app/events#">
     <meta name="twitter:card" content="summary_large_image">
-    <title>Directors' AI Workshop - Proxy Board Services</title>
+    <title>Directors' AI Workshop - Proxy Group</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -36,112 +36,96 @@
         
         .advert-header {
             background: linear-gradient(135deg, #4a4a4a 0%, #2e2e2e 100%);
-            padding: 30px 30px;  /* Reduced padding to make header smaller */
+            padding: 30px;
             color: white;
             text-align: center;
             position: relative;
-            overflow: hidden;
         }
         
         .title {
-            font-size: 28px;  /* Smaller title */
+            font-size: 28px;
             font-weight: 800;
-            margin-bottom: 10px; /* Reduced margin */
+            margin-bottom: 10px;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            position: relative;
         }
         
         .subtitle {
-            font-size: 16px; /* Smaller subtitle */
+            font-size: 16px;
             font-weight: 500;
             max-width: 600px;
             margin: 0 auto;
-            position: relative;
         }
         
-        .logo-bar {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px 30px;
-            padding-bottom: 110px; /* Increased to make room for card and separation */
+        /* Logo Styling - Exactly matching reference */
+        .logo-section {
+            padding: 30px 0;
+            text-align: center;
+            position: relative;
             background: white;
-            border-bottom: 1px solid #f0f0f0;
-            position: relative; /* Added for absolute positioning of card */
         }
         
         .logo {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: inline-block;
+            position: relative;
+            width: 340px;
+            margin: 0 auto;
+        }
+        
+        .circles {
+            position: relative;
+            height: 180px;
+            margin-bottom: 25px;
+        }
+        
+        .circle-pink {
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            background-color: #c01b71;
+            border-radius: 50%;
+            left: 0;
+            top: 0;
+        }
+        
+        .circle-gray {
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            background-color: #5a5a5a;
+            border-radius: 50%;
+            right: 0;
+            top: 0;
         }
         
         .logo-text {
-            font-size: 24px;
-            font-weight: 700;
-            color: #4a4a4a;
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .logo-primary {
+            font-family: Arial, sans-serif;
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+            text-transform: uppercase;
+            margin-bottom: 5px;
             letter-spacing: 1px;
-            position: relative;
-            z-index: 2;
         }
         
-        .logo-subtext {
-            font-size: 12px;
+        .logo-secondary {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: #666;
+            text-transform: uppercase;
             letter-spacing: 2px;
-            color: #555;
-            margin-top: 5px;
-            position: relative;
-            z-index: 2;
+            margin-bottom: 10px;
         }
         
-        .logo:before {
-            content: '';
-            width: 60px;
-            height: 60px;
+        .logo-underline {
+            width: 220px;
+            height: 2px;
             background-color: #c01b71;
-            border-radius: 50%;
-            position: absolute;
-            z-index: 1;
-            opacity: 0.8;
-            transform: translateX(-30px);
-        }
-        
-        .logo:after {
-            content: '';
-            width: 60px;
-            height: 60px;
-            background-color: #4a4a4a;
-            border-radius: 50%;
-            position: absolute;
-            z-index: 1;
-            opacity: 0.8;
-            transform: translateX(30px);
-        }
-        
-        .price-badge {
-            background: #4a4a4a;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-weight: 600;
-            box-shadow: 0 4px 10px rgba(74, 74, 74, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .shine-effect {
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            animation: shine 2s infinite;
-        }
-        
-        @keyframes shine {
-            0% { left: -100%; }
-            100% { left: 100%; }
+            margin: 0 auto;
         }
         
         .content {
@@ -308,7 +292,7 @@
         }
         
         .contact-method:hover {
-            color: #4a4a4a;
+            color: #B22A6F;
         }
         
         .contact-method i {
@@ -362,26 +346,22 @@
                 grid-template-columns: 1fr;
             }
             
-            .logo-bar {
-                padding: 15px;
-                padding-bottom: 100px;
-            }
-            
-            .logo-circles {
+            .logo {
                 width: 280px;
-                height: 160px;
             }
             
-            .logo-circle-pink,
-            .logo-circle-gray {
-                width: 160px;
-                height: 160px;
+            .circles {
+                height: 150px;
             }
             
-            .logo-text-container {
-                padding: 15px 25px;
-                top: 180px;
-                width: 200px;
+            .circle-pink, 
+            .circle-gray {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .logo-underline {
+                width: 180px;
             }
             
             .title {
@@ -407,29 +387,17 @@
             <p class="subtitle">Position your Board for Governance and strategic AI oversight in the digital era</p>
         </div>
         
-        <!-- Logo and Price Bar -->
-        <div class="logo-bar">
+        <!-- Logo Section -->
+        <div class="logo-section">
             <div class="logo">
-                <div class="logo-circles">
-                    <div class="logo-circle-pink"></div>
-                    <div class="logo-circle-gray"></div>
+                <div class="circles">
+                    <div class="circle-pink"></div>
+                    <div class="circle-gray"></div>
                 </div>
-                <div class="logo-text-container">
-                    <div class="logo-text"> </div>
-                    <div class="logo-subtext"> </div>
-                </div> 
-            </div>
-        </div>
-         <!-- Logo and Price Bar -->
-        <div class="logo-bar">
-            <div class="logo">
-                 <div class="logo-circles">
-                    <div class=" "></div>
-                    <div class=" "></div>
-                </div>
-                <div class="logo-text-container">
-                    <div class="logo-text">PROXY GROUP</div>
-                    <div class="logo-subtext">BOARD SERVICES</div>
+                <div class="logo-text">
+                    <div class="logo-primary">PROXY GROUP</div>
+                    <div class="logo-secondary">BOARD SERVICES</div>
+                    <div class="logo-underline"></div>
                 </div>
             </div>
         </div>
@@ -558,7 +526,7 @@
         
         function shareOnTwitter() {
             const url = "https://proxygroup.netlify.app/events#";
-            const text = "Join the Directors' AI Workshop by Proxy Board Services. Position your board for strategic AI oversight and governance in the digital era.";
+            const text = "Join the Directors' AI Workshop by Proxy Group. Position your board for strategic AI oversight and governance in the digital era.";
             window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url), '_blank');
         }
         
@@ -571,13 +539,13 @@
         
         function shareOnWhatsApp() {
             const url = "https://proxygroup.netlify.app/events#";
-            const text = "Join the Directors' AI Workshop by Proxy Board Services on June 5, 2025. Learn about AI governance for boards.";
+            const text = "Join the Directors' AI Workshop by Proxy Group on June 5, 2025. Learn about AI governance for boards.";
             window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(text + " " + url), '_blank');
         }
         
         function shareViaEmail() {
             const subject = "Directors' Artificial Intelligence Workshop - June 5, 2025";
-            const body = "Hello,\n\nI thought you might be interested in this upcoming Directors' AI Workshop by Proxy Board Services. It covers AI fundamentals, governance frameworks, and strategic applications for boards.\n\nDetails:\n- Date: Thursday, June 5, 2025\n- Time: 8:30 AM - 4:30 PM\n- Venue: NIPAM, Windhoek\n- Investment: N$ 5,499.00 (excl. VAT)\n\nRegister here: https://proxygroup.netlify.app/events#\n\nBest regards,";
+            const body = "Hello,\n\nI thought you might be interested in this upcoming Directors' AI Workshop by Proxy Group. It covers AI fundamentals, governance frameworks, and strategic applications for boards.\n\nDetails:\n- Date: Thursday, June 5, 2025\n- Time: 8:30 AM - 4:30 PM\n- Venue: NIPAM, Windhoek\n- Investment: N$ 5,499.00 (excl. VAT)\n\nRegister here: https://proxygroup.netlify.app/events#\n\nBest regards,";
             window.location.href = 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
         }
     </script>
