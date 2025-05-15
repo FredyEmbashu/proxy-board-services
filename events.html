@@ -3,9 +3,375 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Events - Proxy Group</title>
+    <title>Events - Proxy Board Services</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Modal Popup Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.75);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-container {
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: modalFadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: white;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            background-color: #f8f8f8;
+            transform: rotate(90deg);
+        }
+        
+        .modal-close i {
+            color: #B22A6F;
+            font-size: 20px;
+        }
+        
+        /* Registration Form Styles */
+        :root {
+            --primary-color: #B22A6F;
+            --primary-light: #f9f5f7;
+            --primary-dark: #8e2259;
+            --secondary-color: #333;
+            --text-color: #444;
+            --border-radius: 8px;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        .registration-form {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        
+        .form-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .form-header h3 {
+            font-size: 24px;
+            margin: 0;
+            letter-spacing: 0.5px;
+        }
+        
+        .form-header p {
+            margin: 10px 0 0;
+            opacity: 0.9;
+            font-size: 16px;
+        }
+        
+        .form-icon {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-icon i {
+            font-size: 28px;
+            color: var(--primary-color);
+        }
+        
+        .form-body {
+            padding: 30px;
+        }
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            gap: 20px;
+        }
+        
+        .form-group {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .registration-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+        
+        .registration-form input, 
+        .registration-form select, 
+        .registration-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            background-color: #fbfbfb;
+            font-size: 15px;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+        
+        .registration-form input:focus, 
+        .registration-form select:focus, 
+        .registration-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(178, 42, 111, 0.1);
+            background-color: white;
+        }
+        
+        .registration-form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .checkbox-container {
+            display: flex;
+            align-items: flex-start;
+            margin: 25px 0;
+            padding: 15px;
+            background-color: var(--primary-light);
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--primary-color);
+        }
+        
+        .checkbox-container input {
+            width: auto;
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+        
+        .checkbox-container a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .checkbox-container a:hover {
+            text-decoration: underline;
+        }
+        
+        .submit-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 6px rgba(178, 42, 111, 0.2);
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(178, 42, 111, 0.25);
+        }
+        
+        .submit-btn i {
+            margin-right: 8px;
+        }
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #777;
+            font-size: 14px;
+        }
+        
+        .benefits {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: var(--primary-light);
+            border-radius: var(--border-radius);
+        }
+        
+        .benefits h4 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+        
+        .benefits ul {
+            padding-left: 20px;
+        }
+        
+        .benefits li {
+            margin-bottom: 8px;
+        }
+        
+        .event-meta-details {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f8f8;
+            border-radius: var(--border-radius);
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .meta-item i {
+            margin-right: 8px;
+            color: var(--primary-color);
+            font-size: 18px;
+        }
+        
+        /* Open registration button */
+        .register-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        
+        .register-button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(178, 42, 111, 0.2);
+        }
+        
+        .register-button i {
+            margin-right: 8px;
+        }
+        
+        /* Success message */
+        .success-message {
+            display: none;
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-top: 20px;
+            border-left: 4px solid #2e7d32;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        .success-message i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .form-body {
+                padding: 20px 15px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .form-group {
+                min-width: 100%;
+            }
+            
+            .event-meta-details {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .modal-container {
+                width: 95%;
+                max-height: 85vh;
+            }
+            
+            .form-header h3 {
+                font-size: 20px;
+            }
+        }
+        
+        /* Prevent body scrolling when modal is open */
+        body.modal-open {
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -57,77 +423,23 @@
                                 <i class="fas fa-robot" style="font-size: 8rem; color: #B22A6F;"></i>
                             </div>
                         </div>
- <!-- Registration Form -->
-            <div id="directors-ai-registration" class="registration-form" style="margin-top: 80px; border-top: 3px solid #B22A6F; padding-top: 40px;">
-                <h3><i class="fas fa-clipboard-list" style="margin-right: 10px;"></i>DIRECTORS' ARTIFICIAL INTELLIGENCE (AI) WORKSHOP</h3>
-                <p style="text-align: center; margin-bottom: 30px;">Thursday, June 5, 2025 | NIPAM, Windhoek</p>
-                <form id="directorsAIRegistrationForm" action="https://formspree.io/f/mgvklknp" method="POST">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="dirFullName">Full Name</label>
-                            <input type="text" id="dirFullName" name="fullName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="dirEmail">Email Address</label>
-                            <input type="email" id="dirEmail" name="email" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="dirPhone">Phone Number</label>
-                            <input type="tel" id="dirPhone" name="phone" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="dirCompany">Company/Organization</label>
-                            <input type="text" id="dirCompany" name="company" required>
+                        <div style="flex: 2; min-width: 300px; padding: 30px;">
+                            <span style="background-color: #B22A6F; color: white; padding: 5px 10px; border-radius: 4px; font-size: 14px; display: inline-block; margin-bottom: 10px;">June 5, 2025</span>
+                            <h3 style="margin: 0 0 15px 0; font-size: 24px;">DIRECTORS' ARTIFICIAL INTELLIGENCE (AI) WORKSHOP</h3>
+                            <p style="margin-bottom: 20px; color: #555; line-height: 1.6;">Join us for an intensive one-day workshop designed specifically for board directors and executives. Learn how AI is transforming corporate governance and strategic decision-making.</p>
+                            <div style="margin-bottom: 20px;">
+                                <p style="margin: 5px 0;"><i class="fas fa-map-marker-alt" style="color: #B22A6F; width: 20px;"></i> NIPAM, Windhoek</p>
+                                <p style="margin: 5px 0;"><i class="far fa-clock" style="color: #B22A6F; width: 20px;"></i> 09:00 AM - 04:00 PM</p>
+                                <p style="margin: 5px 0;"><i class="fas fa-ticket-alt" style="color: #B22A6F; width: 20px;"></i> N$2,500 per attendee</p>
+                            </div>
+                            <button class="register-button" id="openRegistrationModal">
+                                <i class="fas fa-user-plus"></i>Register Now
+                            </button>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="dirPosition">Position/Title</label>
-                            <input type="text" id="dirPosition" name="position" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="dirBoardExperience">Years of Board Experience</label>
-                            <select id="dirBoardExperience" name="boardExperience" required>
-                                <option value="">Select Experience</option>
-                                <option value="0-2">0-2 years</option>
-                                <option value="3-5">3-5 years</option>
-                                <option value="6-10">6-10 years</option>
-                                <option value="10+">More than 10 years</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="dirDietaryRequirements">Dietary Requirements (if any)</label>
-                            <input type="text" id="dirDietaryRequirements" name="dietaryRequirements">
-                        </div>
-                        <div class="form-group">
-                            <label for="dirPaymentMethod">Payment Method</label>
-                            <select id="dirPaymentMethod" name="paymentMethod" required>
-                                <option value="">Select Payment Method</option>
-                                <option value="bank-transfer">Bank Transfer</option>
-                                <option value="credit-card">Credit Card</option>
-                                <option value="invoice">Company Invoice</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="dirExpectations">What specific AI topics are you most interested in learning about?</label>
-                        <textarea id="dirExpectations" name="expectations" rows="3"></textarea>
-                    </div>
-                    <div class="form-group" style="margin-bottom: 30px;">
-                        <label style="display: flex; align-items: flex-start; cursor: pointer;">
-                            <input type="checkbox" name="terms" required style="width: auto; margin-right: 10px; margin-top: 5px;">
-                            <span>I agree to the <a href="#" target="_blank">terms and conditions</a> and consent to receiving information about this and future events from Proxy Group.</span>
-                        </label>
-                    </div>
-                    <button type="submit" class="btn primary" style="width: 100%;"><i class="fas fa-paper-plane" style="margin-right: 8px;"></i>Submit Registration</button>
-                </form>
+                </div>
             </div>
-        </div>
- -->
+
             <!-- Upcoming Events -->
             <div>
                 <h2 style="text-align: center; margin-bottom: 40px;">
@@ -188,8 +500,7 @@
                     </div>
                 </div>
             </div>
-
-           
+        </div>
     </section>
 
     <!-- Footer -->
@@ -227,9 +538,9 @@
                 
                 <div class="footer-contact">
                     <h3>Contact Us</h3>
-                    <p><i class="fas fa-envelope"></i> info@proxygroup.com.na</p>
+                    <p><i class="fas fa-envelope"></i> boards@proxygroup.com.na</p>
                     <p><i class="fas fa-phone"></i> +264 81 622 3299</p>
-                    <p><i class="fas fa-phone"></i> +264 81 692 9792</p>
+                    <p><i class="fas fa-phone"></i> +264 85 292 9792</p>
                     <div class="footer-social">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -240,7 +551,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 Proxy Group. All Rights Reserved.</p>
+                <p>&copy; 2025 Proxy Board Services. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
@@ -250,31 +561,179 @@
         <i class="fas fa-arrow-up"></i>
     </div>
 
+    <!-- Registration Modal Popup -->
+    <div class="modal-overlay" id="registrationModal">
+        <div class="modal-container">
+            <div class="modal-close" id="closeModal">
+                <i class="fas fa-times"></i>
+            </div>
+            
+            <div class="registration-form">
+                <div class="form-header">
+                    <div class="form-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>DIRECTORS' ARTIFICIAL INTELLIGENCE (AI) WORKSHOP</h3>
+                    <p>Thursday, June 5, 2025 | NIPAM, Windhoek</p>
+                </div>
+                
+                <div class="form-body">
+                    <div class="event-meta-details">
+                        <div class="meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>NIPAM, Windhoek</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="far fa-clock"></i>
+                            <span>9:00 AM - 4:00 PM</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-users"></i>
+                            <span>Limited to 30 participants</span>
+                        </div>
+                    </div>
+                    
+                    <form id="directorsAIRegistrationForm" action="https://formspree.io/f/mgvklknp" method="POST">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="dirFullName">Full Name</label>
+                                <input type="text" id="dirFullName" name="fullName" required placeholder="Your full name">
+                            </div>
+                            <div class="form-group">
+                                <label for="dirEmail">Email Address</label>
+                                <input type="email" id="dirEmail" name="email" required placeholder="Your email address">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="dirPhone">Phone Number</label>
+                                <input type="tel" id="dirPhone" name="phone" required placeholder="Your contact number">
+                            </div>
+                            <div class="form-group">
+                                <label for="dirCompany">Company/Organization</label>
+                                <input type="text" id="dirCompany" name="company" required placeholder="Your organization">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="dirPosition">Position/Title</label>
+                                <input type="text" id="dirPosition" name="position" required placeholder="Your role in the organization">
+                            </div>
+                            <div class="form-group">
+                                <label for="dirBoardExperience">Years of Board Experience</label>
+                                <select id="dirBoardExperience" name="boardExperience" required>
+                                    <option value="">Select Experience</option>
+                                    <option value="0-2">0-2 years</option>
+                                    <option value="3-5">3-5 years</option>
+                                    <option value="6-10">6-10 years</option>
+                                    <option value="10+">More than 10 years</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="dirDietaryRequirements">Dietary Requirements (if any)</label>
+                                <input type="text" id="dirDietaryRequirements" name="dietaryRequirements" placeholder="Special meal requests">
+                            </div>
+                            <div class="form-group">
+                                <label for="dirPaymentMethod">Payment Method</label>
+                                <select id="dirPaymentMethod" name="paymentMethod" required>
+                                    <option value="">Select Payment Method</option>
+                                    <option value="bank-transfer">Bank Transfer</option>
+                                    <option value="credit-card">Credit Card</option>
+                                    <option value="invoice">Company Invoice</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dirExpectations">What specific AI topics are you most interested in learning about?</label>
+                            <textarea id="dirExpectations" name="expectations" rows="3" placeholder="Share your interests to help us tailor the workshop"></textarea>
+                        </div>
+                        
+                        <div class="checkbox-container">
+                            <input type="checkbox" name="terms" required id="terms">
+                            <label for="terms">I agree to the <a href="#" target="_blank">terms and conditions</a> and consent to receiving information about this and future events from Proxy Group.</label>
+                        </div>
+                        
+                        <div class="success-message" id="successMessage">
+                            <i class="fas fa-check-circle"></i> Thank you for registering! You will receive a confirmation email shortly.
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>Submit Registration
+                        </button>
+                    </form>
+                    
+                    <div class="benefits">
+                        <h4>Workshop Benefits</h4>
+                        <ul>
+                            <li>Understand AI implications for board governance and risk management</li>
+                            <li>Learn practical applications of AI for strategic decision-making</li>
+                            <li>Network with other board directors and executives</li>
+                            <li>Receive a certificate of completion and workshop materials</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="form-footer">
+                        <p>For any questions about registration, please contact us at <strong>boards@proxygroup.com.na</strong> or call <strong>+264 85 292 9792</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Show registration popup on page load with a small delay
+        window.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                openModal();
+            }, 1000); // 1 second delay
+        });
+        
         // Mobile Navigation Toggle
         document.querySelector('.nav-toggle').addEventListener('click', function() {
             document.querySelector('nav').classList.toggle('active');
         });
         
-        // Event Details Toggle
-        function toggleEventDetails() {
-            const detailsSection = document.getElementById('eventDetailsSection');
-            const btnText = document.getElementById('detailsBtnText');
-            
-            if (detailsSection.style.display === 'none') {
-                detailsSection.style.display = 'block';
-                btnText.textContent = 'Hide Details';
-            } else {
-                detailsSection.style.display = 'none';
-                btnText.textContent = 'Show Details';
-            }
+        // Modal Functions
+        function openModal() {
+            document.getElementById('registrationModal').classList.add('active');
+            document.body.classList.add('modal-open');
         }
+        
+        function closeModal() {
+            document.getElementById('registrationModal').classList.remove('active');
+            document.body.classList.remove('modal-open');
+        }
+        
+        // Event listeners for modal
+        document.getElementById('openRegistrationModal').addEventListener('click', openModal);
+        document.getElementById('closeModal').addEventListener('click', closeModal);
+        
+        // Close modal when clicking outside
+        document.getElementById('registrationModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
         
         // Form Submission
         document.getElementById('directorsAIRegistrationForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Thank you for registering! You will receive a confirmation email shortly.');
-            this.reset();
+            
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Hide success message and close modal after delay
+            setTimeout(function() {
+                document.getElementById('successMessage').style.display = 'none';
+                document.getElementById('directorsAIRegistrationForm').reset();
+                closeModal();
+            }, 3000);
         });
         
         // Back to Top Button
