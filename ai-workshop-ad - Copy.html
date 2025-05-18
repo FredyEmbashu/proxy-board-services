@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directors AI Workshop</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Arial+Narrow:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Arial Narrow', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: #c01b71;
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 34px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .content {
+            padding: 25px;
+        }
+        .logo-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .logo {
+            max-width: 220px;
+            height: auto;
+        }
+        
+        /* AI Boardroom Image */
+        .ai-boardroom {
+            margin: 15px 0 20px;
+            text-align: center;
+        }
+        .ai-boardroom img {
+            width: 100%;
+            max-width: 750px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Investment Banner - Prominent and at the top */
+        .investment-banner {
+            background: #c01b71;
+            color: white;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            margin: 0 0 20px;
+            box-shadow: 0 4px 10px rgba(192, 27, 113, 0.2);
+        }
+        .investment-amount {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .investment-details {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        /* Event Details in Grid */
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .detail-box {
+            background: #f8f8f8;
+            border-left: 3px solid #c01b71;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+        }
+        .detail-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .detail-text h3 {
+            margin: 0;
+            font-size: 14px;
+            color: #c01b71;
+            text-transform: uppercase;
+        }
+        .detail-text p {
+            margin: 3px 0 0;
+            font-size: 15px;
+        }
+        
+        /* What You'll Learn Section */
+        .key-highlights {
+            background: #8e8e8e;
+            color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+        .key-highlights h3 {
+            margin: 0 0 10px;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+        .key-highlights ul {
+            margin: 0;
+            padding: 0 0 0 20px;
+        }
+        .key-highlights li {
+            margin-bottom: 5px;
+        }
+        
+        /* Registration Info */
+        .contact-info {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+        }
+        .contact-info h3 {
+            margin: 0 0 10px;
+            font-size: 14px;
+            text-transform: uppercase;
+            color: #333;
+        }
+        .contact-info p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        
+        .footer {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        /* Registration Form Styles */
+        .registration-form-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .registration-form {
+            background-color: white;
+            max-width: 700px;
+            margin: 30px auto;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #c01b71;
+            padding-bottom: 15px;
+        }
+        
+        .form-header h2 {
+            color: #c01b71;
+            margin: 0 0 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .form-group select {
+            height: 40px;
+        }
+        
+        .radio-group {
+            margin-top: 8px;
+        }
+        
+        .radio-option {
+            margin-bottom: 8px;
+        }
+        
+        .required-field {
+            color: #c01b71;
+        }
+        
+        .form-submit {
+            background-color: #c01b71;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        
+        .form-submit:hover {
+            background-color: #a01860;
+        }
+        
+        .close-form {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            color: #666;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        
+        .close-form:hover {
+            color: #c01b71;
+        }
+        
+        .form-terms {
+            font-size: 12px;
+            color: #666;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>DIRECTORS' ARTIFICIAL INTELLIGENCE WORKSHOP</h1>
+        </div>
+        
+        <div class="content">
+            <!-- Logo - Updated to use image file instead of SVG -->
+            <div class="logo-container">
+                <img class="logo" src="images/logo.png" alt="Proxy Board Services Logo">
+            </div>
+            
+            <!-- Investment Banner - Updated with "Investment:" label -->
+            <div class="investment-banner">
+                <div class="investment-amount">Investment: N$ 5,499.00</div>
+                <div class="investment-details">per delegate (excl. VAT)</div>
+            </div>
+            
+            <!-- AI Boardroom Visualization - Updated to use AI icon from folder -->
+            <div class="ai-boardroom">
+                <img src="images/ai-icon.jpg" alt="AI Boardroom Technology">
+            </div>
+            
+            <!-- Event Details -->
+            <div class="details-grid">
+                <div class="detail-box">
+                    <svg class="detail-icon" viewBox="0 0 24 24" fill="#c01b71">
+                        <path d="M19,3h-1V1h-2v2H8V1H6v2H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V5C21,3.9,20.1,3,19,3z M19,19H5V8h14V19z"/>
+                    </svg>
+                    <div class="detail-text">
+                        <h3>Date</h3>
+                        <p>Thursday, 05 June 2025</p>
+                    </div>
+                </div>
+                
+                <div class="detail-box">
+                    <svg class="detail-icon" viewBox="0 0 24 24" fill="#c01b71">
+                        <path d="M11.99,2C6.47,2,2,6.48,2,12s4.47,10,9.99,10C17.52,22,22,17.52,22,12S17.52,2,11.99,2z M12,20c-4.42,0-8-3.58-8-8s3.58-8,8-8s8,3.58,8,8S16.42,20,12,20z M12.5,7H11v6l5.25,3.15l0.75-1.23l-4.5-2.67V7z"/>
+                    </svg>
+                    <div class="detail-text">
+                        <h3>Time</h3>
+                        <p>8:30 AM - 4:30 PM</p>
+                    </div>
+                </div>
+                
+                <div class="detail-box">
+                    <svg class="detail-icon" viewBox="0 0 24 24" fill="#c01b71">
+                        <path d="M12,2C8.13,2,5,5.13,5,9c0,5.25,7,13,7,13s7-7.75,7-13C19,5.13,15.87,2,12,2z M12,11.5c-1.38,0-2.5-1.12-2.5-2.5s1.12-2.5,2.5-2.5s2.5,1.12,2.5,2.5S13.38,11.5,12,11.5z"/>
+                    </svg>
+                    <div class="detail-text">
+                        <h3>Venue</h3>
+                        <p>NIPAM, 1-5 Paul Nash Street,<br>Olympia, Windhoek</p>
+                    </div>
+                </div>
+                
+                <div class="detail-box">
+                    <svg class="detail-icon" viewBox="0 0 24 24" fill="#c01b71">
+                        <path d="M20,4H4C2.89,4,2.01,4.89,2.01,6L2,18c0,1.11,0.89,2,2,2h16c1.11,0,2-0.89,2-2V6C22,4.89,21.11,4,20,4z M20,18H4v-6h16V18z M20,8H4V6h16V8z"/>
+                    </svg>
+                    <div class="detail-text">
+                        <h3>Registration</h3>
+                        <p>proxyboardservices@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- What You'll Learn -->
+            <div class="key-highlights">
+                <h3>What You'll Learn</h3>
+                <ul>
+                    <li>AI fundamentals for strategic board oversight</li>
+                    <li>Implementation frameworks and governance responsibilities</li>
+                    <li>Ethical considerations and risk assessment strategies</li>
+                    <li>Practical applications for competitive advantage</li>
+                </ul>
+            </div>
+            
+            <!-- Registration Link - Added -->
+            <div class="registration-link" style="text-align: center; margin: 25px 0;">
+                <a href="#" id="register-button" style="display: inline-block; background: #c01b71; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; font-weight: bold; transition: background 0.3s ease;">
+                    Register Now
+                </a>
+            </div>
+            
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <p>Phone: +264 81 692 9792</p>
+                <p>Email: proxyboardservices@gmail.com</p>
+            </div>
+            
+            <div class="footer">
+                <p>Limited seats available. Includes workshop materials and refreshments.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Registration Form Modal -->
+    <div id="registration-form-container" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 1000; overflow-y: auto;">
+        <div style="background-color: white; max-width: 700px; margin: 30px auto; padding: 30px; border-radius: 8px; box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3); position: relative;">
+            <button id="close-form" style="position: absolute; top: 15px; right: 15px; font-size: 24px; color: #666; cursor: pointer; background: none; border: none;">×</button>
+            
+            <div style="text-align: center; margin-bottom: 25px; border-bottom: 2px solid #c01b71; padding-bottom: 15px;">
+                <h2 style="color: #c01b71; margin: 0 0 10px;">DIRECTORS' AI WORKSHOP REGISTRATION</h2>
+                <p>DATE: 05 JUNE 2025</p>
+                <p>CONTACT: +264 81 692 9792</p>
+                <p>EMAIL: proxyboardservices@gmail.com</p>
+            </div>
+            
+            <form id="workshop-registration" method="POST" action="https://formspree.io/f/mgvklknp">
+                <div style="margin-bottom: 20px;">
+                    <label for="email" style="display: block; margin-bottom: 8px; font-weight: bold; color: #333;">Email <span style="color: #c01b71;">*</span></label>
+                    <input type="email" id="email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px;">
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label for="fullname" style="display: block; margin-bottom: 8px; font-weight: bold; color: #333;">1. Full name of attendant <span style="color: #c01b71;">*</span></label>
+                    <input type="text" id="fullname" name="fullname" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px;">
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #333;">2. Gender <span style="color: #c01b71;">*</span></label>
+                    <div style="margin-top: 8px;">
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="gender-female" name="gender" value="Female" required>
+                            <label for="gender-female">Female</label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="gender-male" name="gender" value="Male">
+                            <label for="gender-male">Male</label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="gender-other" name="gender" value="Other">
+                            <label for="gender-other">Other</label>
+                            <input type="text" id="gender-other-text" name="gender-other-text" style="width: 50%; margin-left: 10px; padding: 5px; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #333;">3. Age group <span style="color: #c01b71;">*</span></label>
+                    <div style="margin-top: 8px;">
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="age-25-30" name="age" value="25-30" required>
+                            <label for="age-25-30">25-30</label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="age-31-40" name="age" value="31-40">
+                            <label for="age-31-40">31-40</label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="age-41-50" name="age" value="41-50">
+                            <label for="age-41-50">41-50</label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="age-55-plus" name="age" value="55+">
+                            <label for="age-55-plus">55+</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label for="company" style="display: block; margin-bottom: 8px; font-weight: bold; color: #333;">4. Employer: Company Name or Institution <span style="color: #c01b71;">*</span></label>
+                    <input type="text" id="company" name="company" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px;">
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label for="position" style="display: block; margin-bottom: 8px; font-weight: bold; color: #333;">5. Position or Title at this Company <span style="color: #c01b71;">*</span></label>
+                    <input type="text" id="position" name="position" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px;">
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #333;">What role on the Board do you hold? <span style="color: #c01b71;">*</span></label>
+                    <div style="margin-top: 8px;">
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="role-chairperson" name="board-role" value="Chairperson" required>
+                            <label for="role-chairperson">Chairperson</label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="role-director" name="board-role" value="Director/Trustee/Member">
+                            <label for="role-director">Director/Trustee/Member</label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="role-executive" name="board-role" value="Executive">
+                            <label for="role-executive">Executive</label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="role-secretary" name="board-role" value="Company/Board Secretary">
+                            <label for="role-secretary">Company/Board Secretary</label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="role-other" name="board-role" value="Other">
+                            <label for="role-other">Other</label>
+                            <input type="text" id="role-other-text" name="role-other-text" style="width: 50%; margin-left: 10px; padding: 5px; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #333;">How long have you served on a Board? <span style="color: #c01b71;">*</span></label>
+                    <div style="margin-top: 8px;">
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="board-time-one" name="board-time" value="One year" required>
+                            <label for="board-time-one">One year</label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="board-time-two" name="board-time" value="Two years">
+                            <label for="board-time-two">Two years</label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="board-time-three" name="board-time" value="Three years">
+                            <label for="board-time-three">Three years</label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="board-time-other" name="board-time" value="Other">
+                            <label for="board-time-other">Other</label>
+                            <input type="text" id="board-time-other-text" name="board-time-other-text" style="width: 50%; margin-left: 10px; padding: 5px; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #333;">Are you searching for a Board seat, as NED? <span style="color: #c01b71;">*</span></label>
+                    <div style="margin-top: 8px;">
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="ned-yes" name="ned-search" value="Yes" required>
+                            <label for="ned-yes">Yes</label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="ned-no" name="ned-search" value="No">
+                            <label for="ned-no">No</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label for="committees" style="display: block; margin-bottom: 8px; font-weight: bold; color: #333;">Do you serve in any sub-Committees? <span style="color: #c01b71;">*</span></label>
+                    <input type="text" id="committees" name="committees" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px;">
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #333;">Have you attended any specialized Board training before?</label>
+                    <div style="margin-top: 8px;">
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="training-yes" name="previous-training" value="Yes">
+                            <label for="training-yes">Yes</label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="training-no" name="previous-training" value="No">
+                            <label for="training-no">No</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label for="profession" style="display: block; margin-bottom: 8px; font-weight: bold; color: #333;">Profession? Rare skill? <span style="color: #c01b71;">*</span></label>
+                    <input type="text" id="profession" name="profession" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px;">
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #333;">Which date is best suitable for you to attend? <span style="color: #c01b71;">*</span></label>
+                    <div style="margin-top: 8px;">
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="date-june" name="preferred-date" value="05 June 2025" required>
+                            <label for="date-june">05 June 2025</label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="date-july" name="preferred-date" value="10 July 2025">
+                            <label for="date-july">10 July 2025</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #333;">Dietary restrictions <span style="color: #c01b71;">*</span></label>
+                    <div style="margin-top: 8px;">
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="diet-none" name="diet" value="None" required>
+                            <label for="diet-none">None</label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="diet-vegetarian" name="diet" value="Vegetarian">
+                            <label for="diet-vegetarian">Vegetarian</label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="diet-vegan" name="diet" value="Vegan">
+                            <label for="diet-vegan">Vegan</label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="diet-kosher" name="diet" value="Kosher">
+                            <label for="diet-kosher">Kosher</label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="diet-gluten" name="diet" value="Gluten-free">
+                            <label for="diet-gluten">Gluten-free</label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="diet-other" name="diet" value="Other">
+                            <label for="diet-other">Other</label>
+                            <input type="text" id="diet-other-text" name="diet-other-text" style="width: 50%; margin-left: 10px; padding: 5px; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #333;">Who is responsible for payment towards your training? <span style="color: #c01b71;">*</span></label>
+                    <div style="margin-top: 8px;">
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="payment-employer" name="payment-responsible" value="Employer" required>
+                            <label for="payment-employer">Employer</label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="payment-self" name="payment-responsible" value="Myself">
+                            <label for="payment-self">Myself</label>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <input type="radio" id="payment-other" name="payment-responsible" value="Other">
+                            <label for="payment-other">Other</label>
+                            <input type="text" id="payment-other-text" name="payment-other-text" style="width: 50%; margin-left: 10px; padding: 5px; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #333;">I understand that I will have to pay the Full fee incl. VAT (15%) prior to attending the training. <span style="color: #c01b71;">*</span></label>
+                    <div style="margin-top: 8px;">
+                        <div style="margin-bottom: 8px;">
+                            <input type="checkbox" id="payment-agreement" name="payment-agreement" value="Agreed" required>
+                            <label for="payment-agreement">I agree</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #333;">Would you like an invoice, sent to you and/or your company?</label>
+                    <div style="margin-top: 8px;">
+                        <div style="margin-bottom: 8px;">
+                            <input type="checkbox" id="invoice-requested" name="invoice-requested" value="Yes">
+                            <label for="invoice-requested">Yes, please send an invoice</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="font-size: 12px; color: #666; margin-top: 20px; padding-top: 15px; border-top: 1px solid #eee;">
+                    <p>Terms & Conditions: Registrations shall close strictly on the 30 May 2025. Invoices shall be issued immediately after submission of registration. Payment close 24hrs to the event. Entry to the event is with a valid Proof of payment, only.</p>
+                </div>
+                
+                <button type="submit" class="form-submit" style="background-color: #c01b71; color: white; border: none; padding: 12px 25px; font-size: 16px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-top: 15px;">Submit Registration</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Registration form functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerButton = document.getElementById('register-button');
+            const formContainer = document.getElementById('registration-form-container');
+            const closeFormButton = document.getElementById('close-form');
+            
+            // Open form when register button is clicked
+            registerButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                formContainer.style.display = 'block';
+                document.body.style.overflow = 'hidden'; // Prevent scrolling behind modal
+            });
+            
+            // Close form when close button is clicked
+            closeFormButton.addEventListener('click', function() {
+                formContainer.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Re-enable scrolling
+            });
+            
+            // Close form when clicking outside the form
+            formContainer.addEventListener('click', function(e) {
+                if (e.target === formContainer) {
+                    formContainer.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Remove the form submission prevention to allow Formspree to handle it
+            // Just add success handling
+            const form = document.getElementById('workshop-registration');
+            form.addEventListener('submit', function() {
+                // This will run after successful form submission
+                setTimeout(function() {
+                    formContainer.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    form.reset();
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
